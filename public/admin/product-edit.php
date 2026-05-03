@@ -14,7 +14,7 @@ if ($id <= 0) {
 $controller = new AdminProductController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller->update($id, $_POST);
+    $controller->update($id, $_POST, $_FILES);
     exit;
 }
 

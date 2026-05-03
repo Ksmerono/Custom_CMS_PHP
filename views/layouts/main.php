@@ -6,191 +6,130 @@
     <title><?= htmlspecialchars($title ?? 'Productos') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f5f5;
-            color: #222;
+            background: #f5f6fa;
         }
 
-        header,
-        footer {
-            background: #111;
-            color: #fff;
-            padding: 1rem 2rem;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .product-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-
-        .product-card a {
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        .admin-menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .admin-menu__item {
-            display: block;
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #111;
-        }
-
-        .admin-menu__item strong {
-            display: block;
-            font-size: 1.2rem;
-            margin-bottom: .5rem;
-        }
-
-        .admin-menu__item span {
-            color: #555;
-        }
-
-        .admin-menu__item--disabled {
-            opacity: .5;
-            pointer-events: none;
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .button {
-            display: inline-block;
-            background: #111;
-            color: #fff;
-            padding: .8rem 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 0;
-            cursor: pointer;
-        }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .admin-table th,
-        .admin-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        .admin-form {
-            display: grid;
-            gap: 1rem;
-            max-width: 640px;
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-        }
-
-        .admin-form label {
-            display: grid;
-            gap: .4rem;
+        .navbar-brand {
             font-weight: 700;
         }
 
-        .admin-form input,
-        .admin-form textarea {
-            padding: .8rem;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font: inherit;
+        .product-card__image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
         }
 
-        .checkbox-label {
-            display: flex !important;
-            flex-direction: row;
-            align-items: center;
-            gap: .5rem;
+        .product-detail__image {
+            width: 100%;
+            max-width: 720px;
+            border-radius: 1rem;
         }
 
-        .actions {
-            display: flex;
-            gap: .5rem;
+        .admin-card {
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .08);
+        }
+
+        .admin-card--disabled {
+            opacity: .45;
+            pointer-events: none;
         }
 
         .action-btn {
+            width: 38px;
+            height: 38px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            border-radius: .65rem;
             text-decoration: none;
-            font-size: 16px;
-            transition: all .2s ease;
         }
 
-        /* EDITAR (naranja claro) */
         .action-btn--edit {
-            background: #fff3e0;
-            color: #fb8c00;
+            background: #fff3cd;
+            color: #b56b00;
         }
 
-        .action-btn--edit:hover {
-            background: #ffe0b2;
-        }
-
-        /* ELIMINAR (rojo) */
         .action-btn--delete {
-            background: #fdecea;
-            color: #e53935;
+            background: #f8d7da;
+            color: #b02a37;
         }
 
-        .action-btn--delete:hover {
-            background: #f8d7da;
+        .current-image img {
+            max-width: 220px;
+            border-radius: .75rem;
+        }
+
+        .product-card__image-frame {
+            position: relative;
+            width: calc(100% - 2rem);
+            aspect-ratio: 1 / 1;
+            margin: 1rem auto 0;
+            overflow: hidden;
+            border-radius: 1rem;
+            
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-card__image-frame::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--product-image);
+            background-size: cover;
+            background-position: center;
+            filter: blur(18px);
+            transform: scale(1.15);
+            opacity: .55;
+        }
+
+        .product-card__image {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <strong>Catálogo PHP</strong>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/index.php">Catálogo PHP</a>
 
-    <main>
+            <div class="d-flex gap-2">
+                <a href="/index.php" class="btn btn-outline-light btn-sm">Web</a>
+                <a href="/admin/index.php" class="btn btn-warning btn-sm">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
         <?php require $viewPath; ?>
     </main>
 
-    <footer>
-        Proyecto PHP MVC sencillo
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container small">
+            Proyecto PHP MVC sencillo
+        </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

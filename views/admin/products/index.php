@@ -1,55 +1,85 @@
-<div class="admin-header">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
     <div>
-        <a href="index.php">← Volver al panel</a>
-        <h1>Productos</h1>
+        <a href="index.php" class="btn btn-outline-secondary btn-sm mb-3">
+            ← Volver al panel
+        </a>
+
+        <h1 class="display-6 fw-bold mb-0">Productos</h1>
     </div>
 
-    <a href="product-create.php" class="button">
+    <a href="product-create.php" class="btn btn-dark">
         Crear producto
     </a>
 </div>
 
 <?php if (empty($products)): ?>
-    <p>No hay productos creados.</p>
+    <div class="alert alert-info">
+        No hay productos creados.
+    </div>
 <?php else: ?>
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Slug</th>
-                <th>Precio</th>
-                <th>Activo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+    <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Slug</th>
+                        <th>Precio</th>
+                        <th>Activo</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
 
-        <tbody>
-            <?php foreach ($products as $product): ?>
-                <tr>
-                    <td><?= htmlspecialchars($product['name']) ?></td>
-                    <td><?= htmlspecialchars($product['slug']) ?></td>
-                    <td><?= number_format((float) $product['price'], 2, ',', '.') ?> €</td>
-                    <td><?= (int) $product['is_active'] === 1 ? 'Sí' : 'No' ?></td>
-                    <td class="actions">
-                        <!-- EDITAR -->
-                        <a
-                            href="product-edit.php?id=<?= (int) $product['id'] ?>"
-                            class="action-btn action-btn--edit"
-                            title="Editar">
-                            ✏️
-                        </a>
+                <tbody>
+                    <?php foreach ($products as $product): ?>
+                        <tr>
+                            <td>
+                                <strong><?= htmlspecialchars($product['name']) ?></strong>
+                            </td>
 
-                        <!-- ELIMINAR -->
-                        <a
-                            href="product-delete.php?id=<?= (int) $product['id'] ?>"
-                            class="action-btn action-btn--delete"
-                            title="Eliminar"
-                            onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
-                            🗑️
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                            <td>
+                                <code><?= htmlspecialchars($product['slug']) ?></code>
+                            </td>
+
+                            <td>
+                                <?= number_format((float) $product['price'], 2, ',', '.') ?> €
+                            </td>
+
+                            <td>
+                                <?php if ((int) $product['is_active'] === 1): ?>
+                                    <span class="badge text-bg-success">Sí</span>
+                                <?php else: ?>
+                                    <span class="badge text-bg-secondary">No</span>
+                                <?php endif; ?>
+                            </td>
+
+                            <td class="text-end">
+                                <a
+                                    href="../producto.php?slug=<?= urlencode($product['slug']) ?>"
+                                    class="action-btn action-btn--view"
+                                    title="Ver producto"
+                                    target="_blank">
+                                    👁️
+                                </a>
+                                <a
+                                    href="product-edit.php?id=<?= (int) $product['id'] ?>"
+                                    class="action-btn action-btn--edit"
+                                    title="Editar">
+                                    ✏️
+                                </a>
+
+                                <a
+                                    href="product-delete.php?id=<?= (int) $product['id'] ?>"
+                                    class="action-btn action-btn--delete"
+                                    title="Eliminar"
+                                    onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
+                                    🗑️
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 <?php endif; ?>

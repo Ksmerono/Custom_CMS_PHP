@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Models\Product;
+use App\Services\ImageUploadService;
 
 class AdminProductController
 {
@@ -24,21 +25,22 @@ class AdminProductController
         ]);
     }
 
-    public function store(array $data): void
+    public function store(array $data, array $files): void
     {
+        $imagePath = ImageUploadService::upload($files['image'] ?? []);
+
         Product::create([
             'name' => trim($data['name'] ?? ''),
             'slug' => trim($data['slug'] ?? ''),
             'description' => trim($data['description'] ?? ''),
             'price' => (float) ($data['price'] ?? 0),
-            'image' => trim($data['image'] ?? ''),
+            'image' => $imagePath,
             'is_active' => isset($data['is_active']) ? 1 : 0,
         ]);
 
         header('Location: products.php');
         exit;
     }
-
     public function edit(int $id): void
     {
         $product = Product::find($id);
@@ -54,7 +56,7 @@ class AdminProductController
         ]);
     }
 
-    public function update(int $id, array $data): void
+    public function update(int $id, array $data, array $files): void
     {
         $product = Product::find($id);
 
@@ -63,12 +65,18 @@ class AdminProductController
             die('Producto no encontrado.');
         }
 
+        $imagePath = ImageUploadService::upload($files['image'] ?? []);
+
+        if ($imagePath) {
+            ImageUploadService::delete($product['image']);
+        }
+
         Product::update($id, [
             'name' => trim($data['name'] ?? ''),
             'slug' => trim($data['slug'] ?? ''),
             'description' => trim($data['description'] ?? ''),
             'price' => (float) ($data['price'] ?? 0),
-            'image' => trim($data['image'] ?? ''),
+            'image' => $imagePath ?: $product['image'],
             'is_active' => isset($data['is_active']) ? 1 : 0,
         ]);
 

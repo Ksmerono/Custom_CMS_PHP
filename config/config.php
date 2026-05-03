@@ -3,9 +3,9 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'database' => '-',
-        'username' => '-',
-        'password' => '-',
+        'database' => 'productos_php',
+        'username' => 'productos',
+        'password' => 'productos',
         'charset' => 'utf8mb4',
     ],
 ];
