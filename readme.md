@@ -77,16 +77,42 @@ Tablas del sistema:
 - **content_fields** → Campos de cada tipo (name, slug, field_type, required, options)
 - **contents** → Contenidos (title, slug, is_active)
 - **content_field_values** → Valores de los campos
+- **users** → Usuarios del sistema (username, email, password, role, is_active)
 
 ### SQL inicial
 
 Ejecutar `sql/content_system.sql` para crear las tablas e insertar tipos por defecto.
+Ejecutar `sql/users.sql` para crear la tabla de usuarios.
+
+---
+
+## 🔐 Sistema de Login
+
+El admin está protegido con autenticación.
+
+### Acceso
+- **URL:** `/admin/login.php`
+- **Usuario:** admin
+- **Contraseña:** admin123
+
+### Características
+- ✅ Passwords encriptadas con bcrypt
+- ✅ Solo admins pueden gestionar usuarios
+- ✅ No se puede eliminar el propio usuario
+- ✅ Registro de usuarios solo desde el panel admin
+- ✅ Roles: admin (gestiona usuarios) / editor (solo contenidos)
+
+### Gestionar Usuarios
+- `users.php` → Lista de usuarios
+- `user-create.php` → Crear usuario
+- `user-edit.php?id=1` → Editar usuario
+- `user-delete.php?id=1` → Eliminar usuario
 
 ---
 
 ## 🖥️ Panel de Administración
 
-Ruta: `/admin/`
+Ruta: `/admin/` (requiere login)
 
 ### Contenidos
 - `contents.php` → Lista de tipos de contenido
@@ -153,7 +179,8 @@ El archivo `.htaccess` redirige todas las peticiones a `index.php`.
 - ✅ Sistema de contenidos configurable
 - ✅ Campos personalizados por tipo
 - ✅ Soporte para imágenes
-- ✅ Panel de administración
+- ✅ Panel de administración con login
+- ✅ Sistema de usuarios con roles (admin/editor)
 - ✅ Activar/desactivar contenidos
 
 ---

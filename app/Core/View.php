@@ -8,7 +8,7 @@ class View
     private static ?string $section = null;
     private static array $sections = [];
 
-    public static function render(string $view, array $data = []): void
+    public static function render(string $view, array $data = [], bool $useLayout = true): void
     {
         extract($data);
         $data['view'] = $view;
@@ -17,6 +17,11 @@ class View
 
         if (!file_exists($viewPath)) {
             die('Vista no encontrada.');
+        }
+
+        if (!$useLayout) {
+            require $viewPath;
+            return;
         }
 
         require __DIR__ . '/../../views/layouts/main.php';

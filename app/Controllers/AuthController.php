@@ -16,7 +16,7 @@ class AuthController
 
         View::render('auth/login', [
             'title' => 'Iniciar Sesión',
-        ]);
+        ], false);
     }
 
     public function authenticate(array $data): void

@@ -113,7 +113,7 @@ class Content
         $pdo = Database::connect();
 
         $contentType = ContentType::find($contentTypeId);
-        $prefix = $contentType['slug'] ?? 'contenido';
+        $prefix = $contentType['route'] ?? $contentType['slug'] ?? 'contenido';
         
         $slug = $data['slug'] ?? '';
         if (empty($slug)) {
@@ -148,7 +148,7 @@ class Content
 
         $content = self::find($id);
         $contentType = ContentType::find($content['content_type_id']);
-        $prefix = $contentType['slug'] ?? 'contenido';
+        $prefix = $contentType['route'] ?? $contentType['slug'] ?? 'contenido';
 
         $slug = $data['slug'] ?? '';
         if (empty($slug)) {

@@ -23,7 +23,7 @@
         <?php foreach ($contents as $content): ?>
         <tr>
             <td><strong><?= htmlspecialchars($content['title']) ?></strong></td>
-            <td><code><?= htmlspecialchars($contentType['slug']) ?>/<?= htmlspecialchars($content['slug']) ?></code></td>
+            <td><code><?= htmlspecialchars($content['slug']) ?></code></td>
             <td>
                 <?php if ($content['is_active']): ?>
                 <span class="badge bg-success">Activo</span>

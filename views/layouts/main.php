@@ -24,7 +24,7 @@
         .product-card__image-frame::before { content: ""; position: absolute; inset: 0; background-image: var(--product-image); background-size: cover; background-position: center; filter: blur(18px); transform: scale(1.15); opacity: .55; }
         .product-card__image { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 
-        .admin-layout .sidebar { background: #1a1a2e; min-height: 100vh; padding: 20px; }
+        .admin-layout .sidebar { background: #1a1a2e; padding: 20px; }
         .admin-layout .sidebar a { color: #fff; text-decoration: none; display: block; padding: 10px 15px; border-radius: 5px; margin-bottom: 5px; }
         .admin-layout .sidebar a:hover, .admin-layout .sidebar a.active { background: #16213e; }
         .admin-layout .main-content { padding: 30px; }
@@ -80,7 +80,7 @@
 </main>
 <?php endif; ?>
 
-<footer class="bg-dark text-white py-4 mt-5">
+<footer class="bg-dark text-white py-4">
     <div class="container small">Proyecto PHP MVC sencillo</div>
 </footer>
 
