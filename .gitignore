@@ -1,0 +1,6 @@
+# Uploads - imágenes (mantener carpeta)
+uploads/*
+!uploads/.gitkeep
+
+# Config
+config/config.php
