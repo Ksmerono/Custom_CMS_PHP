@@ -1,5 +1,5 @@
 # Uploads - imágenes (mantener carpeta)
-uploads/*
+public/uploads/*
 !uploads/.gitkeep
 
 # Config
