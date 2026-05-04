@@ -26,12 +26,12 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
-        <div class="card admin-card admin-card--disabled h-100 border-0 shadow-sm">
+        <a href="users.php" class="card admin-card h-100 border-0 shadow-sm text-decoration-none text-dark">
             <div class="card-body">
-                <div class="fs-1 mb-3">👤</div>
+                <div class="fs-1 mb-3">👥</div>
                 <h2 class="h5">Usuarios</h2>
-                <p class="text-muted mb-0">Próximamente.</p>
+                <p class="text-muted mb-0">Gestionar usuarios del sistema.</p>
             </div>
-        </div>
+        </a>
     </div>
 </div>

@@ -65,6 +65,9 @@
             <a href="index.php">Dashboard</a>
             <a href="contents.php">Contenidos</a>
             <a href="content-types.php">Tipos de Contenido</a>
+            <a href="users.php">Usuarios</a>
+            <hr>
+            <a href="logout.php" class="text-warning">Cerrar Sesión</a>
         </div>
         <div class="col-md-10 main-content">
             <?php require $viewPath; ?>
