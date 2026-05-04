@@ -5,37 +5,27 @@
 </div>
 
 <div class="row g-4">
-    <div class="col-12 col-md-6 col-lg-3">
-        <a href="products.php" class="card admin-card h-100 border-0 shadow-sm text-decoration-none text-dark">
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="contents.php" class="card admin-card h-100 border-0 shadow-sm text-decoration-none text-dark">
             <div class="card-body">
-                <div class="fs-1 mb-3">📦</div>
-                <h2 class="h5">Productos</h2>
-                <p class="text-muted mb-0">Crear, editar y eliminar productos.</p>
+                <div class="fs-1 mb-3">📄</div>
+                <h2 class="h5">Contenidos</h2>
+                <p class="text-muted mb-0">Gestionar tipos de contenido y entradas.</p>
             </div>
         </a>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card admin-card admin-card--disabled h-100 border-0 shadow-sm">
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="content-types.php" class="card admin-card h-100 border-0 shadow-sm text-decoration-none text-dark">
             <div class="card-body">
-                <div class="fs-1 mb-3">📍</div>
-                <h2 class="h5">Direcciones</h2>
-                <p class="text-muted mb-0">Próximamente.</p>
+                <div class="fs-1 mb-3">🗂️</div>
+                <h2 class="h5">Tipos de Contenido</h2>
+                <p class="text-muted mb-0">Crear y configurar tipos de contenido.</p>
             </div>
-        </div>
+        </a>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card admin-card admin-card--disabled h-100 border-0 shadow-sm">
-            <div class="card-body">
-                <div class="fs-1 mb-3">🏷️</div>
-                <h2 class="h5">Categorías</h2>
-                <p class="text-muted mb-0">Próximamente.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-md-6 col-lg-4">
         <div class="card admin-card admin-card--disabled h-100 border-0 shadow-sm">
             <div class="card-body">
                 <div class="fs-1 mb-3">👤</div>

@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-use App\Controllers\ProductController;
+use App\Core\Router;
 
-$controller = new ProductController();
-$controller->index();
+Router::dispatch();
