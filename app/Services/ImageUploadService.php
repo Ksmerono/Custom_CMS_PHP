@@ -36,7 +36,7 @@ class ImageUploadService
             return null;
         }
 
-        return 'uploads/products/' . $fileName;
+        return '/uploads/products/' . $fileName;
     }
     
     public static function delete(?string $path): void

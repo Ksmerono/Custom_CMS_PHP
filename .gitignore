@@ -2,5 +2,8 @@
 public/uploads/*
 !uploads/.gitkeep
 
+# SQL
+
+
 # Config
 config/config.php
