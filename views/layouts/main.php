@@ -9,7 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        body { background: #f5f6fa; }
+        body { 
+            background: #f5f6fa; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
         .navbar-brand { font-weight: 700; }
         .product-card__image { width: 100%; height: 220px; object-fit: cover; }
         .product-detail__image { width: 100%; max-width: 720px; border-radius: 1rem; }
@@ -24,6 +34,8 @@
         .product-card__image-frame::before { content: ""; position: absolute; inset: 0; background-image: var(--product-image); background-size: cover; background-position: center; filter: blur(18px); transform: scale(1.15); opacity: .55; }
         .product-card__image { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 
+        .admin-layout { display: flex; flex-direction: column; min-height: 100vh; }
+        .admin-layout .container-fluid { flex: 1; }
         .admin-layout .sidebar { background: #1a1a2e; padding: 20px; }
         .admin-layout .sidebar a { color: #fff; text-decoration: none; display: block; padding: 10px 15px; border-radius: 5px; margin-bottom: 5px; }
         .admin-layout .sidebar a:hover, .admin-layout .sidebar a.active { background: #16213e; }
@@ -75,14 +87,15 @@
     </div>
 </div>
 <?php else: ?>
+<div class="main-wrapper flex-grow-1">
 <main class="container py-5">
     <?php require $viewPath; ?>
 </main>
-<?php endif; ?>
-
-<footer class="bg-dark text-white py-4">
+</div>
+<footer class="bg-dark text-white py-4 mt-auto">
     <div class="container small">Proyecto PHP MVC sencillo</div>
 </footer>
+<?php endif; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
