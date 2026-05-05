@@ -1,6 +1,8 @@
-# 🧩 Proyecto Catálogo de Productos (PHP MVC)
+# 🧩 CMS Flexible (PHP MVC)
 
-Aplicación web desarrollada en **PHP puro** con arquitectura **MVC ligera**, incluyendo un sistema de gestión de contenidos (CMS) personalizado.
+Aplicación web desarrollada en **PHP puro** con arquitectura **MVC ligera**, implementando un sistema de gestión de contenidos (CMS) totalmente configurable.
+
+La idea central es simple: **creas tipos de contenido y a partir de ellos generas lo que necesites** (productos, noticias, eventos, galerías, etc.).
 
 ---
 
@@ -10,29 +12,29 @@ Aplicación web desarrollada en **PHP puro** con arquitectura **MVC ligera**, in
 pagina_productos/
 ├── app/
 │   ├── Controllers/
-│   │   ├── ContentController.php      # Controlador público
-│   │   ├── AdminContentController.php # Admin de contenidos
+│   │   ├── ContentController.php          # Controlador público
+│   │   ├── AdminContentController.php     # Admin de contenidos
 │   │   └── AdminContentTypeController.php # Admin de tipos
 │   ├── Models/
-│   │   ├── Content.php                # Contenidos
-│   │   ├── ContentType.php            # Tipos de contenido
-│   │   └── ImageUploadService.php     # Subida de imágenes
+│   │   ├── Content.php                    # Contenidos
+│   │   ├── ContentType.php                # Tipos de contenido
+│   │   └── ImageUploadService.php         # Subida de imágenes
 │   ├── Core/
-│   │   ├── Database.php               # Conexión BD
-│   │   ├── View.php                  # Render de vistas
-│   │   └── Router.php                 # Router de URLs limpias
+│   │   ├── Database.php                   # Conexión BD
+│   │   ├── View.php                       # Render de vistas
+│   │   └── Router.php                     # Router de URLs limpias
 ├── config/
-│   └── config.php                     # Configuración BD
+│   └── config.php                         # Configuración BD
 ├── public/
-│   ├── index.php                      # Punto de entrada (router)
-│   ├── admin/                         # Panel de administración
-│   └── uploads/                       # Imágenes
+│   ├── index.php                          # Punto de entrada (router)
+│   ├── admin/                             # Panel de administración
+│   └── uploads/                           # Imágenes subidas
 ├── views/
-│   ├── layouts/main.php               # Layout principal
-│   ├── contents/                      # Vistas públicas
-│   └── admin/                         # Vistas del admin
+│   ├── layouts/main.php                   # Layout principal
+│   ├── contents/                          # Vistas públicas
+│   └── admin/                             # Vistas del admin
 ├── sql/
-│   └── content_system.sql             # Esquema de BD
+│   └── content_system.sql                 # Esquema de BD
 ├── bootstrap.php
 └── .gitignore
 ```
@@ -41,13 +43,15 @@ pagina_productos/
 
 ## ⚙️ Cómo funciona
 
-### Sistema de Contenidos
+### Filosofía del sistema
 
-El proyecto implementa un **CMS flexible** donde puedes crear cualquier tipo de contenido:
+El CMS se basa en un concepto flexible:
 
-1. **Tipos de Contenido** → Definen un grupo (productos, noticias, eventos...)
-2. **Campos** → Cada tipo tiene campos personalizables (texto, número, imagen, etc.)
-3. **Contenidos** → Las entradas reales de cada tipo
+1. **Tipos de Contenido** → Defines qué quieres gestionar (productos, noticias, eventos, recetas...)
+2. **Campos** → Cada tipo tiene sus propios campos personalizables (texto, número, imagen, fecha, booleano, select)
+3. **Contenidos** → Creas las entradas reales usando los campos definidos
+
+No estás limitado a un catálogo de productos. El sistema se adapta a lo que necesites.
 
 ### Flujo de una petición
 
@@ -63,7 +67,7 @@ URL limpia (/productos, /producto/mi-producto)
 
 ### URLs limpias
 
-- `/` → Página de inicio (lista de tipos de contenido)
+- `/` → Página de inicio (lista de tipos de contenido disponibles)
 - `/productos` → Lista de contenidos del tipo "productos"
 - `/producto/mi-producto` → Detalle de un contenido
 
@@ -88,7 +92,7 @@ Ejecutar `sql/users.sql` para crear la tabla de usuarios.
 
 ## 🔐 Sistema de Login
 
-El admin está protegido con autenticación.
+El panel de administración está protegido con autenticación.
 
 ### Acceso
 - **URL:** `/admin/login.php`
@@ -114,6 +118,9 @@ El admin está protegido con autenticación.
 
 Ruta: `/admin/` (requiere login)
 
+### Dashboard
+- Vista general con acceso rápido a las secciones
+
 ### Contenidos
 - `contents.php` → Lista de tipos de contenido
 - `contents.php?type=1` → Lista de contenidos de un tipo
@@ -127,26 +134,26 @@ Ruta: `/admin/` (requiere login)
 
 ---
 
-## 🔧 Admin - Gestionar Tipos de Contenido
+## 🔧 Cómo crear un nuevo tipo de contenido
 
-1. Ir a **Tipos de Contenido**
-2. Crear tipo (ej: "Producto")
-3. Definir la **ruta pública** (ej: "productos")
-4. Agregar campos:
+1. Ir a **Tipos de Contenido** en el panel admin
+2. Crear un nuevo tipo (ej: "Receta")
+3. Definir la **ruta pública** (ej: "recetas")
+4. Agregar los campos que necesites:
    - **Nombre** (slug interno)
    - **Tipo**: texto, textarea, número, fecha, imagen, boolean, select
    - **Obligatorio**: sí/no
    - **Opciones**: para tipo "select" (una por línea)
 
-### Ejemplo: Tipo "Producto"
+### Ejemplo: Tipo "Receta"
 
 | Campo | Tipo | Obligatorio |
 |-------|------|-------------|
-| Descripción | textarea | Sí |
-| Precio | number | Sí |
+| Ingredientes | textarea | Sí |
+| Tiempo preparación | number | Sí |
 | Imagen | image | No |
-| Destacado | boolean | No |
-| Categoría | select | No |
+| Dificultad | select | No |
+| Destacada | boolean | No |
 
 ---
 
@@ -154,29 +161,29 @@ Ruta: `/admin/` (requiere login)
 
 ```bash
 # Con XAMPP
-http://pagina-productos.local/
+http://pagina-cms.local/
 ```
 
 El archivo `.htaccess` redirige todas las peticiones a `index.php`.
 
 ---
 
-## 🌐 Rutas públicas
+## 🌐 Rutas públicas (ejemplo)
 
 | URL | Descripción |
 |-----|-------------|
 | `/` | Página de inicio (lista de tipos) |
 | `/productos` | Lista de productos |
 | `/noticias` | Lista de noticias |
-| `/producto/mi-producto` | Detalle de producto |
-| `/noticia/mi-noticia` | Detalle de noticia |
+| `/productos/mi-producto` | Detalle de producto |
+| `/noticias/mi-noticia` | Detalle de noticia |
 
 ---
 
 ## 📦 Características
 
 - ✅ URLs limpias (sin .php)
-- ✅ Sistema de contenidos configurable
+- ✅ Sistema de contenidos 100% configurable
 - ✅ Campos personalizados por tipo
 - ✅ Soporte para imágenes
 - ✅ Panel de administración con login
@@ -187,4 +194,4 @@ El archivo `.htaccess` redirige todas las peticiones a `index.php`.
 
 ## 👨‍💻 Autor
 
-Proyecto PHP MVC con CMS personalizado.
+Proyecto PHP MVC con CMS flexible y configurable.
