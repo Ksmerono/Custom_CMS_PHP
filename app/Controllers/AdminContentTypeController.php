@@ -130,4 +130,62 @@ class AdminContentTypeController
         header('Location: content-type-edit.php?id=' . $contentTypeId);
         exit;
     }
+
+    public function duplicateField(int $fieldId, int $contentTypeId): void
+    {
+        $field = ContentType::getField($fieldId);
+        if ($field) {
+            $newSlug = $field['slug'] . '-copy';
+            $newName = $field['name'] . ' (copia)';
+            $newOrder = $field['field_order'] + 1;
+            
+            ContentType::addField($contentTypeId, [
+                'name' => $newName,
+                'slug' => $newSlug,
+                'field_type' => $field['field_type'],
+                'required' => 0,
+                'options' => $field['options'],
+                'field_order' => $newOrder,
+            ]);
+        }
+
+        header('Location: content-type-edit.php?id=' . $contentTypeId);
+        exit;
+    }
+
+    public function duplicate(int $id): void
+    {
+        $contentType = ContentType::find($id);
+
+        if (!$contentType) {
+            http_response_code(404);
+            die('Tipo de contenido no encontrado.');
+        }
+
+        $newSlug = $contentType['slug'] . '-copy';
+        $newName = $contentType['name'] . ' (copia)';
+        $newRoute = $contentType['route'] ? $contentType['route'] . '-copy' : $newSlug;
+
+        $newId = ContentType::create([
+            'name' => $newName,
+            'slug' => $newSlug,
+            'route' => $newRoute,
+            'description' => $contentType['description'] ?? '',
+        ]);
+
+        $fields = ContentType::getFields($id);
+        foreach ($fields as $field) {
+            ContentType::addField($newId, [
+                'name' => $field['name'],
+                'slug' => $field['slug'],
+                'field_type' => $field['field_type'],
+                'required' => $field['required'],
+                'options' => $field['options'],
+                'field_order' => $field['field_order'],
+            ]);
+        }
+
+        header('Location: content-types.php');
+        exit;
+    }
 }

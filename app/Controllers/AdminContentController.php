@@ -176,4 +176,57 @@ class AdminContentController
         header('Location: contents.php?type=' . $contentTypeId);
         exit;
     }
+
+    public function duplicate(int $id): void
+    {
+        $content = Content::find($id);
+
+        if (!$content) {
+            http_response_code(404);
+            die('Contenido no encontrado.');
+        }
+
+        $contentType = ContentType::find($content['content_type_id']);
+        $prefix = $contentType['route'] ?? $contentType['slug'] ?? 'contenido';
+
+        $baseSlug = basename($content['slug']);
+        $newSlug = $prefix . '/' . $baseSlug . '-copy';
+        $newTitle = $content['title'] . ' (copia)';
+
+        $pdo = \App\Core\Database::connect();
+        $stmt = $pdo->prepare("
+            INSERT INTO contents (content_type_id, title, slug, is_active)
+            VALUES (:content_type_id, :title, :slug, :is_active)
+        ");
+        $stmt->execute([
+            'content_type_id' => $content['content_type_id'],
+            'title' => $newTitle,
+            'slug' => $newSlug,
+            'is_active' => 0,
+        ]);
+
+        $newContentId = (int) $pdo->lastInsertId();
+
+        $fields = ContentType::getFields($content['content_type_id']);
+        foreach ($fields as $field) {
+            $fieldSlug = $field['slug'];
+            $value = $content['fields'][$fieldSlug] ?? '';
+
+            if (!empty($value)) {
+                $pdo2 = \App\Core\Database::connect();
+                $stmt2 = $pdo2->prepare("
+                    INSERT INTO content_field_values (content_id, field_id, value)
+                    VALUES (:content_id, :field_id, :value)
+                ");
+                $stmt2->execute([
+                    'content_id' => $newContentId,
+                    'field_id' => $field['id'],
+                    'value' => $value,
+                ]);
+            }
+        }
+
+        header('Location: contents.php?type=' . $content['content_type_id']);
+        exit;
+    }
 }

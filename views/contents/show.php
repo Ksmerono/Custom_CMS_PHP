@@ -1,4 +1,4 @@
-<a href="/<?= htmlspecialchars($contentType['slug']) ?>" class="btn btn-outline-secondary mb-4">← Volver al listado</a>
+<a href="/<?= htmlspecialchars($contentType['route'] ?? $contentType['slug']) ?>" class="btn btn-outline-secondary mb-4">← Volver al listado</a>
 
 <div class="card border-0 shadow-sm">
     <div class="card-body p-4 p-lg-5">

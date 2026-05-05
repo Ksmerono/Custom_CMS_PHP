@@ -22,6 +22,8 @@
             <td><code><?= htmlspecialchars($type['slug']) ?></code></td>
             <td><a href="../<?= htmlspecialchars($type['route']) ?>" target="_blank">/<?= htmlspecialchars($type['route']) ?></a></td>
             <td>
+                <a href="/<?= htmlspecialchars($type['route']) ?>" class="btn btn-sm btn-info" target="_blank">Ver</a>
+                <a href="content-type-duplicate.php?id=<?= $type['id'] ?>" class="btn btn-sm btn-warning" onclick="return confirm('¿Duplicar tipo?')">Duplicar</a>
                 <a href="content-type-edit.php?id=<?= $type['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
                 <a href="contents.php?type=<?= $type['id'] ?>" class="btn btn-sm btn-info">Ver Contenidos</a>
                 <a href="content-type-delete.php?id=<?= $type['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar tipo de contenido?')">Eliminar</a>

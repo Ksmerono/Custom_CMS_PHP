@@ -141,6 +141,36 @@ class ContentType
         $stmt->execute(['id' => $fieldId]);
     }
 
+    public static function getField(int $fieldId): ?array
+    {
+        $pdo = Database::connect();
+
+        $stmt = $pdo->prepare("SELECT * FROM content_fields WHERE id = :id");
+        $stmt->execute(['id' => $fieldId]);
+
+        return $stmt->fetch() ?: null;
+    }
+
+    public static function addField(int $contentTypeId, array $data): void
+    {
+        $pdo = Database::connect();
+
+        $stmt = $pdo->prepare("
+            INSERT INTO content_fields (content_type_id, name, slug, field_type, required, options, field_order)
+            VALUES (:content_type_id, :name, :slug, :field_type, :required, :options, :field_order)
+        ");
+
+        $stmt->execute([
+            'content_type_id' => $contentTypeId,
+            'name' => $data['name'],
+            'slug' => $data['slug'],
+            'field_type' => $data['field_type'],
+            'required' => $data['required'] ?? 0,
+            'options' => $data['options'] ?? null,
+            'field_order' => $data['field_order'] ?? 0,
+        ]);
+    }
+
     public static function findByRoute(string $route): ?array
     {
         $pdo = Database::connect();
