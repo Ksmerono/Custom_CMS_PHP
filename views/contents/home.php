@@ -1,5 +1,4 @@
 <div class="mb-5">
-    <span class="badge text-bg-primary mb-3">Catálogo</span>
     <h1 class="display-5 fw-bold">Bienvenido</h1>
     <p class="text-muted">Selecciona una categoría para ver los contenidos.</p>
 </div>

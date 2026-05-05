@@ -16,7 +16,6 @@ if (!empty($fields)) {
 ?>
 
 <div class="mb-5">
-    <span class="badge text-bg-primary mb-3"><?= htmlspecialchars($contentType['route'] ?? $contentType['slug']) ?></span>
     <h1 class="display-5 fw-bold"><?= htmlspecialchars($title) ?></h1>
     <p class="text-muted"><?= htmlspecialchars($contentType['description'] ?? 'Listado de ' . $title) ?></p>
 </div>

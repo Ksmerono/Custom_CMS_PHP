@@ -2,8 +2,6 @@
 
 <div class="card border-0 shadow-sm">
     <div class="card-body p-4 p-lg-5">
-        <span class="badge text-bg-success mb-3"><?= htmlspecialchars($contentType['name']) ?></span>
-
         <h1 class="display-6 fw-bold mb-4">
             <?= htmlspecialchars($content['title']) ?>
         </h1>

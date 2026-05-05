@@ -35,8 +35,9 @@
         .product-card__image { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 
         .admin-layout { display: flex; flex-direction: column; min-height: 100vh; }
-        .admin-layout .container-fluid { flex: 1; }
-        .admin-layout .sidebar { background: #1a1a2e; padding: 20px; }
+        .admin-layout .container-fluid { flex: 1; display: flex; flex-direction: column; }
+        .admin-layout .container-fluid > .row { flex: 1; }
+        .admin-layout .sidebar { background: #1a1a2e; padding: 20px; min-height: 100%; }
         .admin-layout .sidebar a { color: #fff; text-decoration: none; display: block; padding: 10px 15px; border-radius: 5px; margin-bottom: 5px; }
         .admin-layout .sidebar a:hover, .admin-layout .sidebar a.active { background: #16213e; }
         .admin-layout .main-content { padding: 30px; }

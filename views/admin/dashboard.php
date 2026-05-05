@@ -1,5 +1,4 @@
 <div class="mb-5">
-    <span class="badge text-bg-warning mb-3">Admin</span>
     <h1 class="display-6 fw-bold">Panel de administración</h1>
     <p class="text-muted">Desde aquí podrás gestionar las distintas secciones del proyecto.</p>
 </div>
