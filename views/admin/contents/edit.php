@@ -51,7 +51,8 @@
             case 'image':
                 echo '<input type="file" class="form-control" id="' . $fieldName . '" name="' . $fieldName . '" accept="image/*">';
                 if ($fieldValue) {
-                    echo '<p class="mt-2">Imagen actual: <img src="/' . htmlspecialchars($fieldValue) . '" style="max-width: 100px; vertical-align: middle;"></p>';
+                    $imgSrc = str_starts_with($fieldValue, '/') ? $fieldValue : '/' . $fieldValue;
+                    echo '<p class="mt-2">Imagen actual: <img src="' . htmlspecialchars($imgSrc) . '" style="max-width: 100px; vertical-align: middle;"></p>';
                 }
                 echo '<input type="hidden" name="existing_' . $field['id'] . '" value="' . htmlspecialchars($fieldValue) . '">';
                 break;

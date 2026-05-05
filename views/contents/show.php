@@ -18,7 +18,8 @@
                 ?>
                 <div class="mb-4">
                     <?php if ($field['field_type'] === 'image'): ?>
-                        <img src="<?= htmlspecialchars($value) ?>" alt="<?= $label ?>" class="product-detail__image">
+                        <?php $imgSrc = str_starts_with($value, '/') ? $value : '/' . $value; ?>
+                        <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?= $label ?>" class="product-detail__image">
                     <?php elseif ($field['field_type'] === 'boolean'): ?>
                         <p><strong><?= $label ?>:</strong> <?= $value == '1' ? 'Sí' : 'No' ?></p>
                     <?php elseif ($field['field_type'] === 'number'): ?>

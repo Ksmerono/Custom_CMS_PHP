@@ -32,10 +32,11 @@ if (!empty($fields)) {
                 <article class="card h-100 border-0 shadow-sm overflow-hidden">
                     <?php
                     $image = $imageField ? ($item['fields'][$imageField] ?? '') : '';
-                    if (!empty($image)):
+                    $imgSrc = !empty($image) && !str_starts_with($image, '/') ? '/' . $image : $image;
+                    if (!empty($imgSrc)):
                     ?>
-                        <div class="product-card__image-frame" style="--product-image: url('<?= htmlspecialchars($image) ?>');">
-                            <img src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($item['title']) ?>" class="product-card__image">
+                        <div class="product-card__image-frame" style="--product-image: url('<?= htmlspecialchars($imgSrc) ?>');">
+                            <img src="<?= htmlspecialchars($imgSrc) ?>" alt="<?= htmlspecialchars($item['title']) ?>" class="product-card__image">
                         </div>
                     <?php endif; ?>
 
