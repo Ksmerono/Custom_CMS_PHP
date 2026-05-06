@@ -189,7 +189,10 @@ class AdminContentController
         $contentType = ContentType::find($content['content_type_id']);
         $prefix = $contentType['route'] ?? $contentType['slug'] ?? 'contenido';
 
-        $baseSlug = basename($content['slug']);
+        $baseSlug = $content['slug'];
+        if (str_starts_with($baseSlug, $prefix . '/')) {
+            $baseSlug = substr($baseSlug, strlen($prefix) + 1);
+        }
         $newSlug = $prefix . '/' . $baseSlug . '-copy';
         $newTitle = $content['title'] . ' (copia)';
 
