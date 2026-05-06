@@ -34,9 +34,16 @@
             <td><?= date('d/m/Y H:i', strtotime($content['created_at'])) ?></td>
             <td>
                 <a href="/<?= htmlspecialchars($content['slug']) ?>" class="btn btn-sm btn-info" target="_blank">Ver</a>
-                <a href="content-duplicate.php?id=<?= $content['id'] ?>" class="btn btn-sm btn-warning" onclick="return confirm('¿Duplicar contenido?')">Duplicar</a>
+                <form method="post" action="content-duplicate.php?id=<?= $content['id'] ?>" style="display: inline;">
+                    <?= \App\Core\Csrf::field() ?>
+                    <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('¿Duplicar contenido?')">Duplicar</button>
+                </form>
                 <a href="content-edit.php?id=<?= $content['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                <a href="content-delete.php?id=<?= $content['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar contenido?')">Eliminar</a>
+                <form method="post" action="content-delete.php" style="display: inline;">
+                    <?= \App\Core\Csrf::field() ?>
+                    <input type="hidden" name="id" value="<?= $content['id'] ?>">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar contenido?')">Eliminar</button>
+                </form>
             </td>
         </tr>
         <?php endforeach; ?>

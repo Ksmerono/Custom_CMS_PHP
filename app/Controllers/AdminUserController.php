@@ -43,6 +43,18 @@ class AdminUserController
             exit;
         }
 
+        if (strlen($password) < 8) {
+            $_SESSION['error'] = 'La contraseña debe tener al menos 8 caracteres';
+            header('Location: user-create.php');
+            exit;
+        }
+
+        if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password)) {
+            $_SESSION['error'] = 'La contraseña debe incluir al menos una letra mayúscula y un número';
+            header('Location: user-create.php');
+            exit;
+        }
+
         if (User::usernameExists($username)) {
             $_SESSION['error'] = 'El nombre de usuario ya existe';
             header('Location: user-create.php');
@@ -125,6 +137,18 @@ class AdminUserController
         ];
 
         if (!empty($data['password'])) {
+            if (strlen($data['password']) < 8) {
+                $_SESSION['error'] = 'La contraseña debe tener al menos 8 caracteres';
+                header('Location: user-edit.php?id=' . $id);
+                exit;
+            }
+
+            if (!preg_match('/[A-Z]/', $data['password']) || !preg_match('/[0-9]/', $data['password'])) {
+                $_SESSION['error'] = 'La contraseña debe incluir al menos una letra mayúscula y un número';
+                header('Location: user-edit.php?id=' . $id);
+                exit;
+            }
+
             $updateData['password'] = $data['password'];
         }
 

@@ -188,4 +188,19 @@ class AdminContentTypeController
         header('Location: content-types.php');
         exit;
     }
+
+    public function setAsHome(int $id): void
+    {
+        $contentType = ContentType::find($id);
+
+        if (!$contentType) {
+            http_response_code(404);
+            die('Tipo de contenido no encontrado.');
+        }
+
+        ContentType::setAsHome($id);
+
+        header('Location: content-types.php');
+        exit;
+    }
 }

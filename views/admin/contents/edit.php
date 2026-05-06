@@ -6,6 +6,7 @@
 </div>
 
 <form method="post" action="content-update.php?id=<?= $content['id'] ?>" enctype="multipart/form-data" class="card p-4">
+    <?= \App\Core\Csrf::field() ?>
     <div class="mb-3">
         <label for="title" class="form-label">Título</label>
         <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($content['title']) ?>" required>

@@ -6,6 +6,7 @@
 </div>
 
 <form method="post" action="content-type-store.php" class="card p-4">
+    <?= \App\Core\Csrf::field() ?>
     <div class="mb-3">
         <label for="name" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="name" name="name" required>

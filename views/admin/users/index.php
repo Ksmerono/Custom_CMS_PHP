@@ -42,7 +42,11 @@
             </td>
             <td>
                 <a href="user-edit.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Editar</a>
-                <a href="user-delete.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar usuario?')">Eliminar</a>
+                <form method="post" action="user-delete.php" style="display: inline;">
+                    <?= \App\Core\Csrf::field() ?>
+                    <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar usuario?')">Eliminar</button>
+                </form>
             </td>
         </tr>
         <?php endforeach; ?>

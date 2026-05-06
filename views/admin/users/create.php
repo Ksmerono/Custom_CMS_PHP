@@ -11,6 +11,7 @@
 <?php endif; ?>
 
 <form method="post" action="user-store.php" class="card p-4">
+    <?= \App\Core\Csrf::field() ?>
     <div class="mb-3">
         <label for="username" class="form-label">Usuario</label>
         <input type="text" class="form-control" id="username" name="username" required>
@@ -23,7 +24,7 @@
 
     <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" name="password" required minlength="6">
+        <input type="password" class="form-control" id="password" name="password" required minlength="8" pattern="(?=.*[A-Z])(?=.*[0-9]).+" title="Mínimo 8 caracteres, una mayúscula y un número">
     </div>
 
     <div class="mb-3">

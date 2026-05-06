@@ -5,6 +5,7 @@ CREATE TABLE content_types (
     slug VARCHAR(100) NOT NULL UNIQUE,
     route VARCHAR(100) NOT NULL UNIQUE,
     description TEXT,
+    is_home TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -40,6 +41,7 @@ CREATE TABLE content_field_values (
     content_id INT NOT NULL,
     field_id INT NOT NULL,
     value TEXT,
+    UNIQUE KEY unique_content_field (content_id, field_id),
     FOREIGN KEY (content_id) REFERENCES contents(id) ON DELETE CASCADE,
     FOREIGN KEY (field_id) REFERENCES content_fields(id) ON DELETE CASCADE
 );

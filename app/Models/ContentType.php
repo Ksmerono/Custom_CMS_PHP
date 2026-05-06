@@ -186,4 +186,37 @@ class ContentType
 
         return $stmt->fetch() ?: null;
     }
+
+    public static function setAsHome(int $id): void
+    {
+        $pdo = Database::connect();
+
+        $pdo->beginTransaction();
+
+        try {
+            $pdo->exec("UPDATE content_types SET is_home = 0");
+
+            $stmt = $pdo->prepare("UPDATE content_types SET is_home = 1 WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+
+            $pdo->commit();
+        } catch (\Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
+
+    public static function getHome(): ?array
+    {
+        $pdo = Database::connect();
+
+        $stmt = $pdo->query("
+            SELECT *
+            FROM content_types
+            WHERE is_home = 1
+            LIMIT 1
+        ");
+
+        return $stmt->fetch() ?: null;
+    }
 }

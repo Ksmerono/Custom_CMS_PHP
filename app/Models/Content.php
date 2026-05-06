@@ -155,19 +155,8 @@ class Content
             $slug = strtolower(trim($data['title'] ?? ''));
             $slug = preg_replace('/[^a-z0-9-]/', '-', $slug);
             $slug = preg_replace('/-+/', '-', $slug);
-        }
-        
-        $currentSlug = $content['slug'] ?? '';
-        $slugPart = $currentSlug;
-        if (str_starts_with($currentSlug, $prefix . '/')) {
-            $slugPart = substr($currentSlug, strlen($prefix) + 1);
-        }
-        if (!empty($slug) && $slug !== $slugPart) {
-            $slug = $slugPart;
-        }
-        
-        if (empty($slug)) {
-            $slug = strtolower(trim($data['title'] ?? ''));
+        } else {
+            $slug = strtolower(trim($slug));
             $slug = preg_replace('/[^a-z0-9-]/', '-', $slug);
             $slug = preg_replace('/-+/', '-', $slug);
         }

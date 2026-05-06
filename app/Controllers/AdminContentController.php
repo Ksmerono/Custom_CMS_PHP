@@ -213,8 +213,7 @@ class AdminContentController
             $value = $content['fields'][$fieldSlug] ?? '';
 
             if (!empty($value)) {
-                $pdo2 = \App\Core\Database::connect();
-                $stmt2 = $pdo2->prepare("
+                $stmt2 = $pdo->prepare("
                     INSERT INTO content_field_values (content_id, field_id, value)
                     VALUES (:content_id, :field_id, :value)
                 ");

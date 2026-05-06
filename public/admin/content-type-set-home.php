@@ -2,12 +2,16 @@
 require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/auth.php';
 
-use App\Models\ContentType;
+use App\Controllers\AdminContentTypeController;
+use App\Core\Csrf;
 
-$id = (int) ($_GET['id'] ?? 0);
+Csrf::requireValid();
+
+$id = (int) ($_POST['id'] ?? $_GET['id'] ?? 0);
 
 if ($id) {
-    ContentType::setAsHome($id);
+    $controller = new AdminContentTypeController();
+    $controller->setAsHome($id);
 }
 
 header('Location: content-types.php');

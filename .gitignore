@@ -2,8 +2,14 @@
 public/uploads/*
 !uploads/.gitkeep
 
-# SQL
+# SQL.
+
+# .OpenCode
+
+.opencode/
 
 
 # Config
 config/config.php
+
+tareas_realizar.txt

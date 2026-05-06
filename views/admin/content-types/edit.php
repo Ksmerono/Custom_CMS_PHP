@@ -6,6 +6,7 @@
 </div>
 
 <form method="post" action="content-type-update.php?id=<?= $contentType['id'] ?>" class="card p-4 mb-4">
+    <?= \App\Core\Csrf::field() ?>
     <div class="mb-3">
         <label for="name" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($contentType['name']) ?>" required>
@@ -33,6 +34,7 @@
 <h3 class="mt-4">Campos del Tipo de Contenido</h3>
 
 <form method="post" action="content-type-add-field.php?content_type_id=<?= $contentType['id'] ?>" class="card p-4 mb-4">
+    <?= \App\Core\Csrf::field() ?>
     <h5>Agregar Campo</h5>
     <div class="row">
         <div class="col-md-6 mb-3">
@@ -95,7 +97,12 @@
             <td><?= htmlspecialchars($field['field_type']) ?></td>
             <td><?= $field['required'] ? 'Sí' : 'No' ?></td>
             <td>
-                <a href="content-type-delete-field.php?field_id=<?= $field['id'] ?>&content_type_id=<?= $contentType['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar campo?')">Eliminar</a>
+                <form method="post" action="content-type-delete-field.php" style="display: inline;">
+                    <?= \App\Core\Csrf::field() ?>
+                    <input type="hidden" name="field_id" value="<?= $field['id'] ?>">
+                    <input type="hidden" name="content_type_id" value="<?= $contentType['id'] ?>">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar campo?')">Eliminar</button>
+                </form>
             </td>
         </tr>
         <?php endforeach; ?>

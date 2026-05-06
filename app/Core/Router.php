@@ -60,7 +60,15 @@ class Router
 
     private static function home(): void
     {
+        $homeType = ContentType::getHome();
+        
         $controller = new \App\Controllers\ContentController();
+        
+        if ($homeType) {
+            $controller->type($homeType['route']);
+            return;
+        }
+        
         $controller->index();
     }
 

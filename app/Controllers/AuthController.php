@@ -44,6 +44,8 @@ class AuthController
 
         session_regenerate_id(true);
 
+        unset($_SESSION['csrf_token']);
+
         header('Location: /admin/index.php');
         exit;
     }
